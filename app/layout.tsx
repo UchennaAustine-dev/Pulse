@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import Script from "next/script"; // <-- Import Script
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +33,12 @@ export default function RootLayout({
         <link
           href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap"
           rel="stylesheet"
+        />
+        {/* Add the Script here */}
+        <Script
+          src="//prebid.revbid.net/4792/revbid.js"
+          strategy="afterInteractive"
+          async
         />
       </head>
       <body className={inter.className}>
