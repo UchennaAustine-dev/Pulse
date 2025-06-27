@@ -8,6 +8,7 @@ import { RelatedPosts } from "@/components/related-posts";
 import { SocialShare } from "@/components/social-share";
 import { TableOfContents } from "@/components/table-of-contents";
 import { ReadingProgress } from "@/components/reading-progress";
+import { AdBanner } from "@/components/ad-banner";
 import { getPostBySlug, getPosts, getRelatedPosts } from "@/lib/data";
 import { formatDate, calculateReadingTime } from "@/lib/utils";
 import { Clock, Calendar } from "lucide-react";
@@ -74,6 +75,28 @@ export default async function PostPage({
     <>
       <ReadingProgress />
 
+      {/* Top Leaderboard Ad */}
+      <div className="border-b bg-muted/20">
+        <div className="container max-w-[90%] mx-auto py-4 px-4 flex justify-center">
+          <div className="hidden md:block">
+            <AdBanner
+              placementId="revbid-big-leaderboard"
+              id="revbid-big-leaderboard-1142"
+              minWidth={468}
+              minHeight={60}
+            />
+          </div>
+          <div className="md:hidden">
+            <AdBanner
+              placementId="revbid-mobile"
+              id="revbid-mobile-774"
+              minWidth={300}
+              minHeight={100}
+            />
+          </div>
+        </div>
+      </div>
+
       <div className="relative w-full bg-gradient-to-b from-black/70 to-transparent">
         <div className="absolute inset-0 -z-10">
           <Image
@@ -105,8 +128,21 @@ export default async function PostPage({
       </div>
 
       <div className="container max-w-6xl mx-auto px-4 py-8">
-        <div className="flex flex-col gap-8 lg:flex-row">
-          <article className="w-full lg:w-2/3">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Left Sidebar - Desktop Skyscraper Ad */}
+          <div className="hidden xl:block lg:col-span-2">
+            <div className="sticky top-24">
+              <AdBanner
+                placementId="revbid-skyscraper"
+                id="revbid-skyscraper-688"
+                minWidth={120}
+                minHeight={600}
+              />
+            </div>
+          </div>
+
+          {/* Main Article Content */}
+          <article className="lg:col-span-7 xl:col-span-7">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 pb-6 border-b">
               <div className="flex items-center gap-4 mb-4 md:mb-0">
                 <Image
@@ -140,9 +176,32 @@ export default async function PostPage({
               <TableOfContents sections={contentSections} />
             </div>
 
+            {/* Mobile Square Ad - After intro */}
+            <div className="md:hidden my-8 flex justify-center">
+              <AdBanner
+                placementId="revbid-square"
+                id="revbid-square-3919"
+                minWidth={300}
+                minHeight={250}
+              />
+            </div>
+
             <div className="prose prose-lg max-w-none dark:prose-invert mb-10">
               {post.content.split("\n\n").map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
+                <div key={index}>
+                  <p>{paragraph}</p>
+                  {/* Insert mobile ad after 3rd paragraph */}
+                  {index === 2 && (
+                    <div className="md:hidden my-8 flex justify-center not-prose">
+                      <AdBanner
+                        placementId="revbid-mobile"
+                        id="revbid-mobile-content"
+                        minWidth={300}
+                        minHeight={100}
+                      />
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
 
@@ -181,9 +240,20 @@ export default async function PostPage({
             )}
           </article>
 
-          <div className="w-full lg:w-1/3 mt-8 lg:mt-0">
-            <div className="sticky top-20">
-              <div className="bg-card rounded-xl shadow-sm border p-6 mb-8">
+          {/* Right Sidebar */}
+          <div className="lg:col-span-3">
+            <div className="sticky top-20 space-y-8">
+              {/* Desktop Square Ad */}
+              <div className="hidden md:block">
+                <AdBanner
+                  placementId="revbid-square"
+                  id="revbid-square-sidebar"
+                  minWidth={300}
+                  minHeight={250}
+                />
+              </div>
+
+              <div className="bg-card rounded-xl shadow-sm border p-6">
                 <h3 className="font-bebas-neue text-2xl font-bold mb-4">
                   About the Author
                 </h3>
@@ -224,6 +294,28 @@ export default async function PostPage({
                 <Newsletter />
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Leaderboard Ad */}
+      <div className="border-t bg-muted/20 mt-12">
+        <div className="container max-w-[90%] mx-auto py-4 px-4 flex justify-center">
+          <div className="hidden md:block">
+            <AdBanner
+              placementId="revbid-leaderboard"
+              id="revbid-leaderboard-1860"
+              minWidth={468}
+              minHeight={60}
+            />
+          </div>
+          <div className="md:hidden">
+            <AdBanner
+              placementId="revbid-mobile"
+              id="revbid-mobile-bottom"
+              minWidth={300}
+              minHeight={100}
+            />
           </div>
         </div>
       </div>

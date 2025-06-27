@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { AdBanner } from "@/components/ad-banner";
 import { getTrendingTags, getPopularPosts } from "@/lib/data";
 import { PollWidget } from "@/components/poll-widget";
 
@@ -10,6 +11,16 @@ export async function Sidebar() {
 
   return (
     <div className="space-y-6">
+      {/* Mobile Square Ad - Only show on mobile in sidebar */}
+      <div className="md:hidden">
+        <AdBanner
+          placementId="revbid-square"
+          id="revbid-square-mobile"
+          minWidth={300}
+          minHeight={250}
+        />
+      </div>
+
       <Card>
         <CardHeader>
           <CardTitle className="font-bebas-neue text-2xl">
